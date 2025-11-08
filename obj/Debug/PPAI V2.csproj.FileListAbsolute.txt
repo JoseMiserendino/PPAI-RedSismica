@@ -1,0 +1,23 @@
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\2025\V2\PPAI V2\bin\Debug\PPAI V2.exe.config
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\2025\V2\PPAI V2\bin\Debug\PPAI V2.exe
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\2025\V2\PPAI V2\bin\Debug\PPAI V2.pdb
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\2025\V2\PPAI V2\obj\Debug\PPAI V2.csproj.AssemblyReference.cache
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\2025\V2\PPAI V2\obj\Debug\PPAI_V2.interfazPrincipal.resources
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\2025\V2\PPAI V2\obj\Debug\PPAI_V2.InterfazRegistrarRM.resources
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\2025\V2\PPAI V2\obj\Debug\PPAI_V2.Properties.Resources.resources
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\2025\V2\PPAI V2\obj\Debug\PPAI V2.csproj.GenerateResource.cache
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\2025\V2\PPAI V2\obj\Debug\PPAI V2.csproj.CoreCompileInputs.cache
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\2025\V2\PPAI V2\obj\Debug\PPAI V2.exe
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\2025\V2\PPAI V2\obj\Debug\PPAI V2.pdb
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\PPAI-RedSismica\bin\Debug\PPAI V2.exe.config
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\PPAI-RedSismica\bin\Debug\PPAI V2.exe
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\PPAI-RedSismica\bin\Debug\PPAI V2.pdb
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\PPAI-RedSismica\obj\Debug\PPAI V2.csproj.AssemblyReference.cache
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\PPAI-RedSismica\obj\Debug\PPAI V2.exe.config
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\PPAI-RedSismica\obj\Debug\PPAI_V2.interfazPrincipal.resources
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\PPAI-RedSismica\obj\Debug\PPAI_V2.InterfazRegistrarRM.resources
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\PPAI-RedSismica\obj\Debug\PPAI_V2.Properties.Resources.resources
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\PPAI-RedSismica\obj\Debug\PPAI V2.csproj.GenerateResource.cache
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\PPAI-RedSismica\obj\Debug\PPAI V2.csproj.CoreCompileInputs.cache
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\PPAI-RedSismica\obj\Debug\PPAI V2.exe
+C:\Users\miser\OneDrive\Desktop\un\un\3° Año\dsi\ppai\PPAI-RedSismica\obj\Debug\PPAI V2.pdb
