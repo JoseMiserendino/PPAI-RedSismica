@@ -16,7 +16,7 @@ namespace PPAI_V2
         private List<EventoSismico> eventosAutoDetectadosNoRevisados;
         private EventoSismico eventoSismicoSeleccionado;
         private Dictionary<string, object> datosSeriesTemporalesEventoSeleccionado;
-        private Estado estadoBloqueadoEnRevision;
+        // private Estado estadoBloqueadoEnRevision;
         private String alcanceEventoSelec;
         private String clasificacionEventoSelec;
         private String origenEventoSelec;
@@ -31,7 +31,7 @@ namespace PPAI_V2
             "Solicitar revisión a experto"
         };
         String opcFinalIngresada;
-        Estado estadoRechazado;
+        //Estado estadoRechazado;
 
         // Objetos para llevar a cabo el CU (BBDD)
         private List<EventoSismico> eventosSismicos;
@@ -49,17 +49,19 @@ namespace PPAI_V2
             this.interfazRegistrarRM = interfazRegistrarRM;
 
             // Crear estados
-            Estado estadoAutoConfirmado = new Estado("EventoSismico", "AutoConfirmado");
-            Estado estadoAutoDetectado = new Estado("EventoSismico", "AutoDetectado");
-            Estado estadoRechazado = new Estado("EventoSismico", "Rechazado");
-            Estado estadoBloqueadoEnRevision = new Estado("EventoSismico", "BloqueadoEnRevision");
+
+            Estado estadoAutoDetectado = new AutoDetectado();
+            Estado estadoAutoConfirmado = new AutoConfirmado();
+            
+            //Estado estadoAutoConfirmado = new Estado("EventoSismico", "AutoConfirmado");
+            //Estado estadoAutoDetectado = new Estado("EventoSismico", "AutoDetectado");
+            //Estado estadoRechazado = new Estado("EventoSismico", "Rechazado");
+            //Estado estadoBloqueadoEnRevision = new Estado("EventoSismico", "BloqueadoEnRevision");
 
             estados = new List<Estado>
             {
                 estadoAutoConfirmado,
                 estadoAutoDetectado,
-                estadoRechazado,
-                estadoBloqueadoEnRevision
             };
 
             // Crear empleado
@@ -373,43 +375,48 @@ namespace PPAI_V2
             {
                 eventoSismicoSeleccionado = eventosAutoDetectadosNoRevisados[index];
                 Console.WriteLine($"Evento seleccionado: {eventoSismicoSeleccionado.TomarDatosPrincipales()}");
-            }
-
-            BuscarEstadoBloqueadoEnRevision();
-        }
-
-        public void BuscarEstadoBloqueadoEnRevision()
-        {
-            foreach (var estado in estados)
+            } else
             {
-                if (estado.EsAmbitoEventoSismico() && estado.EsBloqueadoEnRevision())
-                {
-                    Console.WriteLine($"Estado bloqueado en revisión encontrado: {estado.NombreEstado}");
-                    estadoBloqueadoEnRevision = estado;
-                    break;
-                }
+                throw new Exception($"Hubo un error al seleccionar un evento no revisado");
             }
 
+            DateTime fechaHoraActual = TomarFechaYHoraActual();
             TomarUsuarioLogueado();
+            BloquearEventoSelec(fechaHoraActual);
+            TomarDatosSismicosEventoSelec();
         }
 
-        // public void TomarFechaYHoraActual()
-        // {
-        //     DateTime fechaHoraActual = DateTime.Now;
-        //     Console.WriteLine($"Fecha y hora actual: {fechaHoraActual}");
-        // }
+        //public void BuscarEstadoBloqueadoEnRevision()
+        //{
+        //    foreach (var estado in estados)
+        //    {
+        //        if (estado.EsAmbitoEventoSismico() && estado.EsBloqueadoEnRevision())
+        //        {
+        //            Console.WriteLine($"Estado bloqueado en revisión encontrado: {estado.NombreEstado}");
+        //            estadoBloqueadoEnRevision = estado;
+        //            break;
+        //        }
+        //    }
+
+        //    TomarUsuarioLogueado();
+        //}
+
+        public DateTime TomarFechaYHoraActual()
+        { 
+            return DateTime.Now;
+        }
 
         public void TomarUsuarioLogueado()
         {
             empleadoLogueado = Sesion.IniciarSesion(empleadoLogueado).ObtenerUsuarioLogueado();
-            BloquearEventoSelec();
         }
 
-        public void BloquearEventoSelec()
+        public void BloquearEventoSelec(DateTime fh)
         {
-            eventoSismicoSeleccionado.BloquearEvento(estadoBloqueadoEnRevision, empleadoLogueado);
-            Console.WriteLine($"Evento Bloqueado: \n{eventoSismicoSeleccionado}");
-            TomarDatosSismicosEventoSelec();
+            eventoSismicoSeleccionado.BloquearEvento(fh, empleadoLogueado);
+            //eventoSismicoSeleccionado.BloquearEvento(estadoBloqueadoEnRevision, empleadoLogueado);
+            //Console.WriteLine($"Evento Bloqueado: \n{eventoSismicoSeleccionado}");
+            //TomarDatosSismicosEventoSelec();
         }
 
         public void TomarDatosSismicosEventoSelec()
@@ -704,34 +711,35 @@ namespace PPAI_V2
                 return;
             }
 
-            BuscarEstadoRechazado();
+            ActualizarEstado();
         }
 
-        public void BuscarEstadoRechazado()
-        {
-            foreach (var estado in estados)
-            {
-                if (estado.EsAmbitoEventoSismico() && estado.EsRechazado())
-                {
-                    estadoRechazado = estado;
-                    Console.WriteLine($"Estado rechazado encontrado: {estadoRechazado.NombreEstado}");
-                    break;
-                }
-                ;
-            }
+        //public void BuscarEstadoRechazado()
+        //{
+        //    foreach (var estado in estados)
+        //    {
+        //        if (estado.EsAmbitoEventoSismico() && estado.EsRechazado())
+        //        {
+        //            estadoRechazado = estado;
+        //            Console.WriteLine($"Estado rechazado encontrado: {estadoRechazado.NombreEstado}");
+        //            break;
+        //        }
+        //        ;
+        //    }
 
-            if (estadoRechazado != null)
-            {
-                ActualizarEstado();
-            } else
-            {
-                Console.WriteLine("No se encontró un estado rechazado válido.");
-            }
-        }
+        //    if (estadoRechazado != null)
+        //    {
+        //        ActualizarEstado();
+        //    } else
+        //    {
+        //        Console.WriteLine("No se encontró un estado rechazado válido.");
+        //    }
+        //}
 
         public void ActualizarEstado()
         {
-            eventoSismicoSeleccionado.ActualizarEstado(estadoRechazado, empleadoLogueado);
+            DateTime fhActual = TomarFechaYHoraActual();
+            eventoSismicoSeleccionado.rechazar(fhActual, empleadoLogueado);
             FinCU();
         }
 

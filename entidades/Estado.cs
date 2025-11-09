@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_V2.entidades
 {
-    internal class Estado
+    internal abstract class Estado
     {
         private String ambito;
         private String nombreEstado;
@@ -47,6 +47,56 @@ namespace PPAI_V2.entidades
         public bool EsBloqueadoEnRevision()
         {
             return nombreEstado == "BloqueadoEnRevision";
+        }
+
+        public virtual void AdquirirDatos()
+        {
+            throw new InvalidOperationException(
+                $"No se puede ejecutar AdquirirDatos en el estado {nombreEstado}");
+        }
+
+        public virtual void Cerrar()
+        {
+            throw new InvalidOperationException(
+                $"No se puede ejecutar Cerrar en el estado {nombreEstado}");
+        }
+
+        public virtual void Confirmar()
+        {
+            throw new InvalidOperationException(
+                $"No se puede ejecutar Confirmar en el estado {nombreEstado}");
+        }
+
+        public virtual void Rechazar(DateTime fh, Empleado usuarioLogueado,
+            CambioEstado[] cambiosEstado, EventoSismico evento)
+        {
+            throw new InvalidOperationException(
+                $"No se puede ejecutar Rechazar en el estado {nombreEstado}");
+        }
+
+        public virtual void Derivar()
+        {
+            throw new InvalidOperationException(
+                $"No se puede ejecutar Derivar en el estado {nombreEstado}");
+        }
+
+        public virtual void ControlarTiempo()
+        {
+            throw new InvalidOperationException(
+                $"No se puede ejecutar ControlarTiempo en el estado {nombreEstado}");
+        }
+
+        public virtual void Revisar(DateTime fh, Empleado usuarioLogueado,
+            CambioEstado[] cambiosEstado, EventoSismico evento)
+        {
+            throw new InvalidOperationException(
+                $"No se puede ejecutar Revisar en el estado {nombreEstado}");
+        }
+
+        public virtual void Anular()
+        {
+            throw new InvalidOperationException(
+                $"No se puede ejecutar Anular en el estado {nombreEstado}");
         }
 
         public override string ToString()

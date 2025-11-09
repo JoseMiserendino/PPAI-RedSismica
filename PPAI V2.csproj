@@ -47,6 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="entidades\AlcanceSismo.cs" />
+    <Compile Include="entidades\AutoConfirmado.cs" />
+    <Compile Include="entidades\AutoDetectado.cs" />
+    <Compile Include="entidades\BloqueadoEnRevision.cs" />
     <Compile Include="entidades\CambioEstado.cs" />
     <Compile Include="entidades\ClasificacionSismo.cs" />
     <Compile Include="entidades\DetalleMuestraSismica.cs" />
@@ -57,6 +60,7 @@
     <Compile Include="entidades\MagnitudRichter.cs" />
     <Compile Include="entidades\MuestraSismica.cs" />
     <Compile Include="entidades\OrigenDeGeneracion.cs" />
+    <Compile Include="entidades\Rechazado.cs" />
     <Compile Include="entidades\SerieTemporal.cs" />
     <Compile Include="entidades\Sesion.cs" />
     <Compile Include="entidades\Sismografo.cs" />

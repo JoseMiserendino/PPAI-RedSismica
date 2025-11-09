@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PPAI_V2.entidades
+{
+    internal class BloqueadoEnRevision : Estado
+    {
+        public BloqueadoEnRevision() : base("EventoSismico", "BloqueadoEnRevision")
+        {
+        }
+
+        public override void Rechazar(DateTime fh, Empleado usuarioLogueado, CambioEstado[] cambiosEstado, EventoSismico evento)
+        {
+            finalizarCambioEstadoActual(fh, usuarioLogueado, cambiosEstado);
+            Rechazado rechazado = crearEstadoRechazado();
+            CambioEstado nuevoCambioEstado = crearCambioEstado(fh, usuarioLogueado, rechazado);
+            evento.cambiarEstado(rechazado, nuevoCambioEstado);
+        }
+
+        public void finalizarCambioEstadoActual(DateTime fh, Empleado usuarioLogueado, CambioEstado[] cambiosEstado)
+        {
+            foreach (CambioEstado c in cambiosEstado)
+            {
+                if (c.EsEstadoActual())
+                {
+                    c.FechaHoraFin = fh;
+                }
+            }
+        }
+
+        public Rechazado crearEstadoRechazado()
+        {
+            return new Rechazado();
+        }
+
+        public CambioEstado crearCambioEstado(DateTime fh, Empleado empleado, Estado estado)
+        {
+            return new CambioEstado(fh, estado, empleado);
+        }
+    }
+}

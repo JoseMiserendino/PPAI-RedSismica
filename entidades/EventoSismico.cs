@@ -108,13 +108,13 @@ namespace PPAI_V2.entidades
             set { alcanceSismo = value; }
         }
 
-
         public List<SerieTemporal> SerieTemporal => serieTemporal;
 
         public bool EsAutoDetectado()
         {
             return estadoActual.EsAutoDetectado();
         }
+
         public string TomarDatosPrincipales()
         {
             return $"Fecha: {fechaHoraOcurrencia:yyyy-MM-dd HH:mm:ss}| " +
@@ -129,32 +129,42 @@ namespace PPAI_V2.entidades
             set { fechaHoraOcurrencia = value; }
         }
 
-        public void BloquearEvento(Estado estadoBloqueado, Empleado empleado)
+        public void BloquearEvento(DateTime fh, Empleado empleado)
         {
-            FinalizarUltimoCambioEstado();
-            CrearCambioEstado(estadoBloqueado, empleado);
+            estadoActual.Revisar(fh, empleado, cambioEstado.ToArray(), this);
         }
 
-        public void FinalizarUltimoCambioEstado()
+        public void cambiarEstado(Estado estado, CambioEstado cambio)
         {
-            foreach (var cambioEstado in cambioEstado)
-            {
-                if (cambioEstado.EsEstadoActual())
-                {
-                    cambioEstado.FechaHoraFin = DateTime.Now;
-                    break;
-                }
-            }
-        }
-
-        public void CrearCambioEstado(Estado estado, Empleado empleado)
-        {
-            CambioEstado nuevoCambio = new CambioEstado(DateTime.Now, estado, empleado);
-            cambioEstado.Add(nuevoCambio);
             estadoActual = estado;
-
-            Console.WriteLine($"Cambio de estado creado: {nuevoCambio}");
+            cambioEstado.Add(cambio);
         }
+
+        public void rechazar(DateTime fh, Empleado usuarioLogueado)
+        {
+            estadoActual.Rechazar(fh, usuarioLogueado, cambioEstado.ToArray(), this);
+        }
+
+        //public void FinalizarUltimoCambioEstado()
+        //{
+        //    foreach (var cambioEstado in cambioEstado)
+        //    {
+        //        if (cambioEstado.EsEstadoActual())
+        //        {
+        //            cambioEstado.FechaHoraFin = DateTime.Now;
+        //            break;
+        //        }
+        //    }
+        //}
+
+        //public void CrearCambioEstado(Estado estado, Empleado empleado)
+        //{
+        //    CambioEstado nuevoCambio = new CambioEstado(DateTime.Now, estado, empleado);
+        //    cambioEstado.Add(nuevoCambio);
+        //    estadoActual = estado;
+
+        //    Console.WriteLine($"Cambio de estado creado: {nuevoCambio}");
+        //}
 
         public (string Alcance, string Clasificacion, string Origen) BuscarDatosSismicosEventoSelec()
         {
@@ -175,18 +185,18 @@ namespace PPAI_V2.entidades
         //     return sb.ToString();
         // }
 
-        public void ActualizarEstado(Estado estadoRechazado, Empleado empleadoLogueado)
-        {
-            foreach (var cambioEstado in cambioEstado)
-            {
-                if (cambioEstado.EsEstadoActual())
-                {
-                    cambioEstado.FechaHoraFin = DateTime.Now;
-                    break;
-                }
-            }
+        //public void ActualizarEstado(Estado estadoRechazado, Empleado empleadoLogueado)
+        //{
+        //    foreach (var cambioEstado in cambioEstado)
+        //    {
+        //        if (cambioEstado.EsEstadoActual())
+        //        {
+        //            cambioEstado.FechaHoraFin = DateTime.Now;
+        //            break;
+        //        }
+        //    }
 
-            CrearCambioEstado(estadoRechazado, empleadoLogueado);
-        }
+        //    CrearCambioEstado(estadoRechazado, empleadoLogueado);
+        //}
     }
 }
