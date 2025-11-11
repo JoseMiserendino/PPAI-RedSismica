@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_V2.entidades
 {
-    internal class Sesion
+    public class Sesion
     {
         private static Sesion instancia; // Singleton para simular una única sesión
         private Empleado usuarioLogueado;

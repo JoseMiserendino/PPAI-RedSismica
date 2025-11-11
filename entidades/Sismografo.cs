@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace PPAI_V2.entidades
 {
-    internal class Sismografo
+    public class Sismografo
     {
         // Atributos
+        public int Id { get; set; }
         private DateTime fechaAdquisicion;
         private string identificadorSismografo { get; set; }
         private string nroSerie;

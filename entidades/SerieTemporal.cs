@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_V2.entidades
 {
-    internal class SerieTemporal
+    public class SerieTemporal
     {
         // Atributos
         private double condicionAlarma;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_V2.entidades
 {
-    internal abstract class Estado
+    public abstract class Estado
     {
         private String ambito;
         private String nombreEstado;

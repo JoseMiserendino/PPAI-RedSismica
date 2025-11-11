@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_V2.entidades
 {
-    internal class Rechazado : Estado
+    public class Rechazado : Estado
     {
         public Rechazado() : base("EventoSismico", "Rechazado")
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_V2.entidades
 {
-    internal class EstacionSismologica
+    public class EstacionSismologica
     {
         private string codigoEstacion;
         private string documentoCertificacionAdq;

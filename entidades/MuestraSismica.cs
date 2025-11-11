@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace PPAI_V2.entidades
 {
-    internal class MuestraSismica
+    public class MuestraSismica
     {
         // Atributos
         private DateTime fechaHoraMuestra;
 
         // Atributos referenciales
-        List<DetalleMuestraSismica> detalleMuestraSismica;
+        public List<DetalleMuestraSismica> detalleMuestraSismica;
 
         public MuestraSismica(DateTime fechaHoraMuestra, List<DetalleMuestraSismica> detalleMuestraSismica)
         {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PPAI_V2.daos;
+using PPAI_V2.gestor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace PPAI_V2.entidades
 {
-    internal class EventoSismico
+    public class EventoSismico
     {
 
         // Atributos
+        private int id;
         private DateTime fechaHoraFin;
         private DateTime fechaHoraOcurrencia;
         private double latitudEpicentro;
@@ -24,8 +27,8 @@ namespace PPAI_V2.entidades
         private OrigenDeGeneracion origenGeneracion;
         private AlcanceSismo alcanceSismo;
         private Estado estadoActual;
-        private List<CambioEstado> cambioEstado;
-        private List<SerieTemporal> serieTemporal;
+        public List<CambioEstado> cambioEstado;
+        public List<SerieTemporal> serieTemporal { get; set; } = new List<SerieTemporal>();
 
         public EventoSismico(
             DateTime fechaHoraOcurrencia,
@@ -91,6 +94,12 @@ namespace PPAI_V2.entidades
 
             return sb.ToString();
         }
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
         public ClasificacionSismo Clasificacion
         {
             get { return clasificacion; }
@@ -138,6 +147,17 @@ namespace PPAI_V2.entidades
         {
             estadoActual = estado;
             cambioEstado.Add(cambio);
+
+            // Persistir en la base de datos
+            EventoSismicoDAO eventoDAO = new EventoSismicoDAO();
+            CambioEstadoDAO cambioDAO = new CambioEstadoDAO();
+
+            // 1. Actualizar el estado actual del evento
+            eventoDAO.ActualizarEstado(this.Id, estado.NombreEstado);
+
+            // 2. Insertar el nuevo cambio de estado
+            int? empleadoId = cambio.Responsable?.Id;
+            cambioDAO.Insertar(cambio, this.Id, empleadoId);
         }
 
         public void rechazar(DateTime fh, Empleado usuarioLogueado)
@@ -175,6 +195,68 @@ namespace PPAI_V2.entidades
             return (alcanceEventoSelec, clasificacionEventoSelec, origenEventoSelec);
         }
 
+
+        public DateTime FechaHoraFin
+        {
+            get { return fechaHoraFin; }
+            set { fechaHoraFin = value; }
+        }
+
+        public double LatitudEpicentro
+        {
+            get { return latitudEpicentro; }
+            set { latitudEpicentro = value; }
+        }
+
+        public double LongitudEpicentro
+        {
+            get { return longitudEpicentro; }
+            set { longitudEpicentro = value; }
+        }
+
+        public double LatitudHipocentro
+        {
+            get { return latitudHipocentro; }
+            set { latitudHipocentro = value; }
+        }
+
+        public double LongitudHipocentro
+        {
+            get { return longitudHipocentro; }
+            set { longitudHipocentro = value; }
+        }
+
+        public double ValorMagnitud
+        {
+            get { return valorMagnitud; }
+            set { valorMagnitud = value; }
+        }
+
+        public MagnitudRichter Magnitud
+        {
+            get { return magnitud; }
+            set { magnitud = value; }
+        }
+
+        public Estado EstadoActual
+        {
+            get { return estadoActual; }
+            set { estadoActual = value; }
+        }
+
+        public List<CambioEstado> CambiosEstado
+        {
+            get { return cambioEstado; }
+            set { cambioEstado = value; }
+        }
+
+        public List<SerieTemporal> SeriesTemporales
+        {
+            get { return serieTemporal; }
+            set { serieTemporal = value; }
+        }
+
+        
         // public string BuscarDatosSeriesTemporalesEvento()
         // {
         //     var sb = new StringBuilder();

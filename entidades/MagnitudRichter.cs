@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_V2.entidades
 {
-    internal class MagnitudRichter
+    public class MagnitudRichter
     {
         String descripcionMagnitud;
         double numero;

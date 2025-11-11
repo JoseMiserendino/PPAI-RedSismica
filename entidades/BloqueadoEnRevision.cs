@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PPAI_V2.daos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_V2.entidades
 {
-    internal class BloqueadoEnRevision : Estado
+    public class BloqueadoEnRevision : Estado
     {
         public BloqueadoEnRevision() : base("EventoSismico", "BloqueadoEnRevision")
         {
@@ -15,6 +16,8 @@ namespace PPAI_V2.entidades
         public override void Rechazar(DateTime fh, Empleado usuarioLogueado, CambioEstado[] cambiosEstado, EventoSismico evento)
         {
             finalizarCambioEstadoActual(fh, usuarioLogueado, cambiosEstado);
+            CambioEstadoDAO cambioDAO = new CambioEstadoDAO();
+            cambioDAO.ActualizarFechaFinUltimoCambio(evento.Id, fh);
             Rechazado rechazado = crearEstadoRechazado();
             CambioEstado nuevoCambioEstado = crearCambioEstado(fh, usuarioLogueado, rechazado);
             evento.cambiarEstado(rechazado, nuevoCambioEstado);

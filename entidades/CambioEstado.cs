@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_V2.entidades
 {
-    internal class CambioEstado
+    public class CambioEstado
     {
         // Atributos
         private DateTime? fechaHoraFin;
@@ -15,6 +15,8 @@ namespace PPAI_V2.entidades
         // Atributos referenciales
         private Estado estado;
         private Empleado responsableInspeccion;
+
+        public int Id { get; private set; }
 
         public CambioEstado(DateTime fechaHoraInicio, Estado estado, Empleado responsableInspeccion)
         {
@@ -29,6 +31,24 @@ namespace PPAI_V2.entidades
             this.estado = estado;
             this.responsableInspeccion = responsableInspeccion;
             this.fechaHoraFin = fechaHoraFin;
+        }
+
+        public DateTime FechaHoraInicio
+        {
+            get => fechaHoraInicio;
+            set => fechaHoraInicio = value;
+        }
+
+        public Estado Estado
+        {
+            get => estado;
+            set => estado = value;
+        }
+
+        public Empleado Responsable
+        {
+            get => responsableInspeccion;
+            set => responsableInspeccion = value;
         }
 
         public DateTime? FechaHoraFin
