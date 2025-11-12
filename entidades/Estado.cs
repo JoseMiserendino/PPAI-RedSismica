@@ -61,7 +61,7 @@ namespace PPAI_V2.entidades
                 $"No se puede ejecutar Cerrar en el estado {nombreEstado}");
         }
 
-        public virtual void Confirmar()
+        public virtual void Confirmar(DateTime fh, Empleado usuarioLogueado, CambioEstado[] cambiosEstado, EventoSismico evento)
         {
             throw new InvalidOperationException(
                 $"No se puede ejecutar Confirmar en el estado {nombreEstado}");
@@ -74,7 +74,8 @@ namespace PPAI_V2.entidades
                 $"No se puede ejecutar Rechazar en el estado {nombreEstado}");
         }
 
-        public virtual void Derivar()
+        public virtual void Derivar(DateTime fh, Empleado usuarioLogueado,
+            CambioEstado[] cambiosEstado, EventoSismico evento)
         {
             throw new InvalidOperationException(
                 $"No se puede ejecutar Derivar en el estado {nombreEstado}");

@@ -186,6 +186,8 @@
     <Compile Include="entidades\BloqueadoEnRevision.cs" />
     <Compile Include="entidades\CambioEstado.cs" />
     <Compile Include="entidades\ClasificacionSismo.cs" />
+    <Compile Include="entidades\ConfirmadoPorPersonal.cs" />
+    <Compile Include="entidades\Derivado.cs" />
     <Compile Include="entidades\DetalleMuestraSismica.cs" />
     <Compile Include="entidades\Empleado.cs" />
     <Compile Include="entidades\EstacionSismologica.cs" />

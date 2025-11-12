@@ -13,6 +13,36 @@ namespace PPAI_V2.entidades
         {
         }
 
+        public override void Confirmar(DateTime fh, Empleado usuarioLogueado, CambioEstado[] cambiosEstado, EventoSismico evento)
+        {
+            finalizarCambioEstadoActual(fh, usuarioLogueado, cambiosEstado);
+            CambioEstadoDAO cambioDAO = new CambioEstadoDAO();
+            cambioDAO.ActualizarFechaFinUltimoCambio(evento.Id, fh);
+            ConfirmadoPorPersonal confirmado = crearEstadoConfirmado();
+            CambioEstado nuevoCambioEstado = crearCambioEstado(fh, usuarioLogueado, confirmado);
+            evento.cambiarEstado(confirmado, nuevoCambioEstado);
+        }
+
+        public override void Derivar(DateTime fh, Empleado usuarioLogueado, CambioEstado[] cambiosEstado, EventoSismico evento)
+        {
+            finalizarCambioEstadoActual(fh, usuarioLogueado, cambiosEstado);
+            CambioEstadoDAO cambioDAO = new CambioEstadoDAO();
+            cambioDAO.ActualizarFechaFinUltimoCambio(evento.Id, fh);
+            Derivado derivado = crearEstadoDerivado();
+            CambioEstado nuevoCambioEstado = crearCambioEstado(fh, usuarioLogueado, derivado);
+            evento.cambiarEstado(derivado, nuevoCambioEstado);
+        }
+
+        public Derivado crearEstadoDerivado()
+        {
+            return new Derivado();
+        }
+
+        public ConfirmadoPorPersonal crearEstadoConfirmado()
+        {
+            return new ConfirmadoPorPersonal();
+        }
+
         public override void Rechazar(DateTime fh, Empleado usuarioLogueado, CambioEstado[] cambiosEstado, EventoSismico evento)
         {
             finalizarCambioEstadoActual(fh, usuarioLogueado, cambiosEstado);

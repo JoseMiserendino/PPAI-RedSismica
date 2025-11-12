@@ -1,14 +1,15 @@
-﻿    using System;
+﻿    using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Options;
+    using PPAI_V2.daos;
+    using PPAI_V2.entidades;
+    using PPAI_V2.gestor;
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
     using System.Security.Cryptography.X509Certificates;
     using System.Text;
     using System.Threading.Tasks;
-    using PPAI_V2.entidades;
-    using PPAI_V2.daos;
-    using PPAI_V2.gestor;
-    using Microsoft.Data.SqlClient;
 
     namespace PPAI_V2
     {
@@ -503,7 +504,6 @@
                 var nombreEstacion = sismografo.TomarNombreEstacion();
                 var identificadorSismografo = sismografo.IdentificadorSismografo;
 
-
                 var datosEstacion = new Dictionary<string, object>
                 {
                     ["NombreEstacion"] = nombreEstacion,
@@ -724,7 +724,6 @@
 
             // === CONTINUAR FLUJO ===
             interfazRegistrarRM.PedirSelecOpcFinal(opcionesFinales);
-            interfazRegistrarRM.PedirSelecOpcFinal(opcionesFinales);
         }
 
         
@@ -740,16 +739,16 @@
                 case "Rechazar evento":
                     opcFinalIngresada = "Confirmar evento";
                     Console.WriteLine("Rechazar evento");
-                    ValidarDatosEvento();
                     break;
                 case "Solicitar revisión a experto": 
-                opcFinalIngresada = "Confirmar evento";
+                opcFinalIngresada = "Solicitar revisión a experto";
                 Console.WriteLine("Solicitar revision evento");
                     break;
                 default:
                     Console.WriteLine("Opción no válida.");
                     break;
             }
+            ValidarDatosEvento();
         }
 
         public void ValidarDatosEvento()
@@ -799,7 +798,23 @@
         public void ActualizarEstado()
         {
             DateTime fhActual = TomarFechaYHoraActual();
-            eventoSismicoSeleccionado.rechazar(fhActual, empleadoLogueado);
+
+            switch (opcFinalIngresada)
+            {
+                case "Confirmar evento":
+                    eventoSismicoSeleccionado.confirmar(fhActual, empleadoLogueado);
+                    break;
+                case "Rechazar evento":
+                    eventoSismicoSeleccionado.rechazar(fhActual, empleadoLogueado);
+                    break;
+                case "Solicitar revisión a experto":
+                    eventoSismicoSeleccionado.derivar(fhActual, empleadoLogueado);
+                    break;
+                default:
+                    Console.WriteLine("Opción no válida.");
+                    break;
+            }
+            
             FinCU();
         }
 

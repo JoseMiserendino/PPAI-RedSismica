@@ -165,6 +165,16 @@ namespace PPAI_V2.entidades
             estadoActual.Rechazar(fh, usuarioLogueado, cambioEstado.ToArray(), this);
         }
 
+        public void derivar(DateTime fh, Empleado usuarioLogueado)
+        {
+            estadoActual.Derivar(fh, usuarioLogueado, cambioEstado.ToArray(), this);
+        }
+        
+        public void confirmar(DateTime fh, Empleado usuarioLogueado)
+        {
+            estadoActual.Confirmar(fh, usuarioLogueado, cambioEstado.ToArray(), this);
+        }
+
         //public void FinalizarUltimoCambioEstado()
         //{
         //    foreach (var cambioEstado in cambioEstado)
